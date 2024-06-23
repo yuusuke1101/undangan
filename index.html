@@ -276,21 +276,32 @@
                     <div class="border rounded-pill shadow py-2 px-4 mx-2 mb-4">
 
                         <!-- Ganti waktunya pada data-waktu (sesuai format tersebut) -->
-                        <div class="row justify-content-center" data-time="2024-01-01 00:00:00" id="count-down">
-                            <div class="col-3 p-1">
-                                <h2 class="d-inline m-0 p-0" id="day">0</h2><small class="ms-1 me-0 my-0 p-0 d-inline">Hari</small>
-                            </div>
-                            <div class="col-3 p-1">
-                                <h2 class="d-inline m-0 p-0" id="hour">0</h2><small class="ms-1 me-0 my-0 p-0 d-inline">Jam</small>
-                            </div>
-                            <div class="col-3 p-1">
-                                <h2 class="d-inline m-0 p-0" id="minute">0</h2><small class="ms-1 me-0 my-0 p-0 d-inline">Menit</small>
-                            </div>
-                            <div class="col-3 p-1">
-                                <h2 class="d-inline m-0 p-0" id="second">0</h2><small class="ms-1 me-0 my-0 p-0 d-inline">Detik</small>
-                            </div>
-                        </div>
-                    </div>
+                        const targetDate = new Date('July 6, 2025 00:00:00 GMT+00:00').getTime();
+
+        // Update countdown setiap detik
+        const interval = setInterval(function() {
+            // Dapatkan waktu saat ini
+            const now = new Date().getTime();
+
+            // Hitung selisih waktu antara sekarang dan target
+            const distance = targetDate - now;
+
+            // Hitung hari, jam, menit, dan detik
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Tampilkan hasilnya
+            document.getElementById('countdown').innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+
+            // Jika waktu target sudah tercapai, hentikan interval
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById('countdown').innerHTML = 'Waktu telah berlalu!';
+            }
+        }, 1000); // Setiap 1 detik (1000 milidetik)
+
 
                     <p style="font-size: 0.9rem;" class="mt-4 py-2">
                         Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, insyaAllah kami akan menyelenggarakan
